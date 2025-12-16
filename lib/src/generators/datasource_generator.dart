@@ -19,7 +19,6 @@ class DatasourceGenerator extends BaseGenerator {
   }
 
   Future<void> _generateInterface(GenerationConfig config) async {
-    final variables = getVariables(config);
     final content = DataTemplates.datasourceInterface;
     final outputPath = _getInterfacePath(config);
 
