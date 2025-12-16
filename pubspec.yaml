@@ -1,4 +1,4 @@
-name: arch_generator
+name: flutter_arch_generator
 description: A CLI tool to generate Flutter clean architecture feature structures with boilerplate code.
 version: 1.0.0
 homepage: https://github.com/awshakam1998/arch_generator
@@ -19,4 +19,5 @@ dev_dependencies:
   test: ^1.25.6
 
 executables:
+  flutter_arch_generator:
   arch_generator:

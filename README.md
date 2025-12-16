@@ -1,6 +1,9 @@
-# arch_generator
+# flutter_arch_generator
 
 A powerful CLI tool to generate Flutter clean architecture feature structures with boilerplate code templates. This tool helps you quickly scaffold features following clean architecture principles with support for multiple state management solutions.
+
+**Package Name**: `flutter_arch_generator`
+**Repository**: https://github.com/awshakam1998/arch_generator
 
 ## Features
 
@@ -30,12 +33,25 @@ A powerful CLI tool to generate Flutter clean architecture feature structures wi
    dart run bin/arch_generator.dart <feature_name> [options]
    ```
 
-### Global Installation (Optional)
+### Global Installation (Recommended)
 
-To use the tool from anywhere:
+Install from pub.dev:
 
 ```bash
-dart pub global activate --source path .
+dart pub global activate flutter_arch_generator
+```
+
+Or from GitHub:
+
+```bash
+dart pub global activate --source git https://github.com/awshakam1998/arch_generator.git
+```
+
+Then use anywhere:
+
+```bash
+flutter_arch_generator <feature_name> [options]
+# Or the shorter alias:
 arch_generator <feature_name> [options]
 ```
 

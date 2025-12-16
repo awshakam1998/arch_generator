@@ -1,4 +1,4 @@
-import 'package:arch_generator/arch_generator.dart';
+import 'package:flutter_arch_generator/flutter_arch_generator.dart';
 import 'package:test/test.dart';
 
 void main() {
