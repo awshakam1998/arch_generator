@@ -18,14 +18,17 @@ import '../generators/state_management/riverpod_generator.dart';
 import '../models/generation_config.dart';
 import '../utils/file_utils.dart';
 import '../utils/logger.dart';
+import '../utils/pubspec_manager.dart';
 import '../utils/string_utils.dart';
 
 class GenerateCommand {
   final Logger logger = Logger();
   late final FileUtils fileUtils;
+  late final PubspecManager pubspecManager;
 
   GenerateCommand() {
     fileUtils = FileUtils(logger);
+    pubspecManager = PubspecManager(logger);
   }
 
   Future<void> run(List<String> arguments) async {
@@ -67,13 +70,25 @@ class GenerateCommand {
       logger.info('Formatting generated files...');
       await fileUtils.formatDirectory(config.featurePath);
 
+      // Add dependencies to pubspec.yaml
+      final skipDeps = results['no-deps'] as bool;
+      if (!skipDeps) {
+        logger.divider();
+        logger.info('Updating pubspec.yaml with required dependencies...');
+        await pubspecManager.addDependencies(config);
+      }
+
       logger.divider();
       logger.success('Feature "${config.featureName}" generated successfully!');
       logger.info('');
       logger.info('Next steps:');
       logger.info('  1. Review generated files in ${config.featurePath}');
       logger.info('  2. Implement TODO comments in the generated code');
-      logger.info('  3. Add necessary dependencies to pubspec.yaml');
+      if (skipDeps) {
+        logger.info('  3. Add necessary dependencies to pubspec.yaml');
+      } else {
+        logger.info('  3. Run "flutter pub get" to install dependencies');
+      }
       logger.info('');
     } catch (e) {
       if (e is FormatException) {
@@ -133,6 +148,11 @@ class GenerateCommand {
         abbr: 'o',
         help: 'Output directory',
         defaultsTo: Constants.defaultOutputPath,
+      )
+      ..addFlag(
+        'no-deps',
+        negatable: false,
+        help: 'Skip adding dependencies to pubspec.yaml',
       )
       ..addFlag(
         'help',

@@ -85,7 +85,21 @@ Options:
   --screen=<name>         Generate screen with given name
   --widget=<name>         Generate widget with given name
   --output=<path>         Output directory (default: lib/features)
+  --no-deps               Skip adding dependencies to pubspec.yaml
   --help, -h              Show this help message
+
+Dependencies:
+  The tool automatically adds required dependencies to pubspec.yaml:
+  
+  Core dependencies (always added):
+    - equatable: ^2.0.5
+    - dartz: ^0.10.1
+  
+  State management dependencies (based on --state):
+    - bloc:      flutter_bloc, bloc
+    - provider:  provider
+    - getx:      get
+    - riverpod:  flutter_riverpod, riverpod_annotation
 
 Examples:
   # Generate basic folder structure
@@ -99,5 +113,8 @@ Examples:
 
   # Generate with custom output
   arch_generator auth --output=lib/custom_features --state=provider
+
+  # Generate without modifying pubspec.yaml
+  arch_generator auth --state=bloc --no-deps
 ''';
 }

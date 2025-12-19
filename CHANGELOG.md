@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.1.0] - 2024-12-19
+
+### Added
+- **Automatic Dependency Management**: The tool now automatically adds required dependencies to `pubspec.yaml`
+  - Core dependencies: `equatable`, `dartz`
+  - State management dependencies based on `--state` flag:
+    - Bloc: `flutter_bloc`, `bloc`
+    - Provider: `provider`
+    - GetX: `get`
+    - Riverpod: `flutter_riverpod`, `riverpod_annotation`
+- New `--no-deps` flag to skip automatic dependency updates
+- New `PubspecManager` utility for managing pubspec.yaml dependencies
+
+### Improved
+- Updated help text with dependency information
+- Better post-generation instructions (prompts to run `flutter pub get`)
+- Enhanced README with dependency management documentation
+
 ## [1.0.0] - 2024-12-16
 
 ### Added

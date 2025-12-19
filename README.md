@@ -76,7 +76,32 @@ dart run bin/arch_generator.dart <feature_name> [options]
 | `--screen` | | Generate screen with given name | Any PascalCase name |
 | `--widget` | | Generate widget with given name | Any PascalCase name |
 | `--output` | `-o` | Output directory | Default: `lib/features` |
+| `--no-deps` | | Skip adding dependencies to pubspec.yaml | - |
 | `--help` | `-h` | Show help message | - |
+
+## Automatic Dependency Management
+
+The tool automatically adds required dependencies to your `pubspec.yaml`:
+
+### Core Dependencies (always added)
+```yaml
+dependencies:
+  equatable: ^2.0.5
+  dartz: ^0.10.1
+```
+
+### State Management Dependencies
+
+| State Management | Packages Added |
+|-----------------|----------------|
+| `--state=bloc` | `flutter_bloc: ^8.1.6`, `bloc: ^8.1.4` |
+| `--state=provider` | `provider: ^6.1.2` |
+| `--state=getx` | `get: ^4.6.6` |
+| `--state=riverpod` | `flutter_riverpod: ^2.5.1`, `riverpod_annotation: ^2.3.5` |
+
+> **Note:** After generation, run `flutter pub get` to install the new dependencies.
+
+> **Tip:** Use `--no-deps` flag to skip automatic dependency updates if you prefer to manage them manually.
 
 ## Examples
 
